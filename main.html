@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adventure – Explore Nature</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1517;
+      --panel:#121a1d;
+      --muted:#8fa3a9;
+      --text:#e7f2f6;
+      --accent:#b6d12a;
+      --line:#304247;
+      --card:#0f181a;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --radius-lg:24px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      color:var(--text);
+      background:linear-gradient(180deg,#0c1214 0%,#0f1517 60%,#0f1517 100%);
+    }
+    .wrap{max-width:var(--maxw);
+        margin:0 auto;
+        padding:0 22px}
+    header.top{
+      position:sticky;top:0;z-index:30;
+      backdrop-filter:saturate(120%) blur(8px);
+      background:rgba(15,21,23,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+        display:flex;
+        align-items:center;
+        gap:18px;
+        padding:10px 0;
+        font-size: 15px;
+    }
+    .brand{display:flex;
+        align-items:center;
+        gap:10px;
+        font-weight:800;
+        letter-spacing:.06em;
+        padding-left: 10px;
+    }
+    .brand .logo{width:36px;
+        height:36px;
+        border:2px solid var(--accent);
+        border-radius:50%;
+        display:grid;
+        place-items:center;
+        font-weight:800
+    }
+    .menu{display:flex;
+        gap:18px;
+        align-items:center;
+    position: absolute;
+    left: 65%;
+    }
+    .menu a{color:var(--muted);
+        text-decoration:none;
+        font-weight:500; 
+        position:absolute right;}
+    .menu a.active{color:var(--text);
+        position:relative}
+    .menu a.active::after{content:"";
+    position:absolute;
+    left:0;
+    right: 100px;
+    bottom:-10px;
+    height:2px;
+    background:var(--accent);
+    border-radius:2px}
+    .btn{padding:10px 16px;
+        border-radius:999px;
+        border:1px solid var(--line);
+        text-decoration:none;
+        color:var(--text)}
+
+    /* HERO */
+    
+    .hero .image{
+      position:relative;
+      isolation:isolate;
+      height:62vh;
+      min-height:420px;
+      border-radius:0 0 var(--radius-lg) var(--radius-lg);
+      background:url("nature.jpg") center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      box-shadow:var(--shadow);
+    }
+    .hero .overlay{position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.55) 40%,rgba(15,21,23,.9) 100%)}
+    .hero h1{
+      position:absolute;
+      left:6%;
+      bottom:22%;
+      font-family:Montserrat,sans-serif;
+      font-weight:800;
+      font-size:clamp(44px,11vw,120px);
+      letter-spacing:.02em;
+      margin:0;
+    }
+    .hero p.sub{
+        position:absolute;
+        left:6%;
+        bottom:25%;
+        margin:0;
+        color:var(--muted);
+        font-weight:500
+    }
+
+    .hero .badges{position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
+        display:flex;
+        justify-content:center;
+        gap:12px;
+        padding: 20px;
+    }
+    .badge{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(17,25,27,.7);
+      border:1px solid var(--line);
+      backdrop-filter:blur(6px);
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:14px
+    }
+    .dot{width:8px;
+        height:8px;
+        border:2px solid var(--accent);
+        border-radius:50%}
+
+   
+    h2.title{font-family:Montserrat,sans-serif;
+        font-weight:700;
+        margin: 10px 0 22px}
+    .lead{color:var(--muted);
+        margin-top:4px}
+
+    /* CARD STRIP */
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .card .thumb{aspect-ratio:4/3;background:#0b0f10 url("hotel1.jpg") center/cover}
+    .card:nth-child(2) .thumb{
+        background-image:url("hotel2.jpg")
+    }
+    .card:nth-child(3) .thumb{
+        background-image:url("hotel4.jpg")
+    }
+    .card:nth-child(4) .thumb{
+        background-image:url("hotel3.jpg")
+    }
+    .card .body{
+        padding:14px 14px 18px
+    }
+    .card small{
+        color:var(--muted)
+    }
+
+    /* REASONS */
+    .reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    .reason{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:20px;display:flex;gap:14px;align-items:flex-start}
+    .reason .ico{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);background:#0f181a;font-size:22px}
+    .reason h4{margin:0 0 6px;font-weight:600}
+    .reason p{margin:0;color:var(--muted)}
+
+    /* FEATURE GRID */
+    .feature{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:start}
+    .masonry{
+        padding-top: 10px;
+        display:grid;gap:18px}
+    .masonry img{width:100%;
+        height:400px;
+        display:block;
+        border-radius:var(--radius);
+        border:1px solid var(--line)}
+    .feature .copy{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+    .copy h3{font-family:Montserrat,sans-serif;margin:0 0 10px;font-size:28px}
+    .copy p{color:var(--muted);line-height:1.7}
+    .cta{margin-top:18px;display:inline-block;background:var(--accent);color:#10130b;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700}
+
+    /* EXPLORE SECTION */
+    .explore .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px}
+    .explore .forest{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+    .explore .forest img{width:100%;display:block}
+    .tag{position:absolute;background:rgba(15,21,23,.8);border:1px solid var(--line);color:var(--muted);padding:10px 12px;border-radius:12px;max-width:260px;backdrop-filter:blur(4px)}
+    .tag::before{content:"";position:absolute;left:10px;top:-8px;width:14px;height:14px;background:var(--accent);border-radius:999px;border:3px solid #223036}
+    .tag.t1{left:4%;top:8%}
+    .tag.t2{left:30%;top:42%}
+    .tag.t3{left:12%;bottom:8%}
+
+    footer{margin:80px 0 40px;color:var(--muted);text-align:center}
+
+    /* RESPONSIVE */
+    @media (max-width: 1000px){
+      .cards{grid-template-columns:repeat(4,1fr)}
+      .reasons{grid-template-columns:1fr}
+      .feature{grid-template-columns:1fr}
+      .hero .image{height:58vh}
+    }
+    @media (max-width: 620px){
+      .cards{grid-template-columns:1fr}
+      .menu{display:none}
+      .hero h1{bottom:20%}
+      .hero .badges{justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap nav">
+      <div class="brand"><div class="logo">x</div> <span>Explore</span></div>
+      <nav class="menu" aria-label="Primary">
+        <a class="active" href="#"></a>
+        <a href="#">About</a>
+        <a href="#">Blogs</a>
+        <a href="#">Book Now</a>
+        <a class="btn" href="#">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="image">
+      <div class="overlay"></div>
+      <p class="sub">Create your outdoor adventure. Discover with us.</p>
+      <div class="badges wrap">
+        <div class="badge"><span class="dot"></span> Be yourself with new emotion</div>
+        <div class="badge"><span class="dot"></span> Create your outdoor adventure</div>
+        <div class="badge"><span class="dot"></span> Be a yourself with new emotion</div>
+        <div class="badge"><span class="dot"></span> With new emotion be yourself</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2 class="title">The Wonders Of Nature</h2>
+    <p class="lead">We seek to provide the most authentic and asthetic stays for travellers around the world.</p>
+    <div class="cards" aria-label="Featured destinations">
+      <article class="card">
+        <div class="thumb" role="img" aria-label="Cimei Hill"></div>
+        <div class="body">
+          <h4 style="margin:0 0 6px">Cimei Hill</h4>
+          <small>Unwind in pure, raw authentic nature.</small>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" role="img" aria-label="Havana Street"></div>
+        <div class="body">
+          <h4 style="margin:0 0 6px">Havana Street</h4>
+          <small>Create your own scenic adventure.</small>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" role="img" aria-label="Ghumajhree Forest"></div>
+        <div class="body">
+          <h4 style="margin:0 0 6px">Ghumajhree Forest</h4>
+          <small>Conserve, travel, and treasure.</small>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb" role="img" aria-label="Red Mountain"></div>
+        <div class="body">
+          <h4 style="margin:0 0 6px">Red Mountain</h4>
+          <small>Sunrise ridges and riverside air.</small>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2 class="title">Reason For Choosing Us</h2>
+    <div class="reasons">
+      <div class="reason">
+        <div class="ico">🏅</div>
+        <div>
+          <h4>Tried & Trusted</h4>
+          <p>We're trusted worldwide by 2M travellers just like you.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="ico">🧭</div>
+        <div>
+          <h4>Reliable Support</h4>
+          <p>Here for you 24/7. Reach out by phone, email or chat.</p>
+        </div>
+      </div>
+      <div class="reason">
+        <div class="ico">🤝</div>
+        <div>
+          <h4>One‑stop Travel Partner</h4>
+          <p>Your search ends here. We've got your entire trip covered.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap feature">
+    <div class="masonry">
+      <img src="an1.jpg" alt="Jaguar"/>
+      <img src="safari.jpg" alt="Safari"/>
+      <img src="birds.jpg" alt="bird watching"/>
+    </div>
+    <div class="copy">
+      <h3>Here's what makes a vacation perfect for you!</h3>
+      <p>Whether you're planning a family vacation with your pet, a relaxing weekend getaway, or an adventurous excursion, vacation rentals are ideal for trips of all types. You can find everything from charming mountain cabins and lakeside lodges to breathtaking forest stays.</p>
+      <a class="cta" href="#">Book Now</a>
+    </div>
+  </section>
+
+  <section class="wrap explore">
+    <h2 class="title">Explore The Nature With Us</h2>
+    <div class="panel">
+      <div class="forest">
+        <img src="endimg.jpg" alt="Dense green forest"/>
+        <div class="tag t1">Whether you're planning a family vacation with your pet, a relaxing weekend getaway, 2 million trees.</div>
+        <div class="tag t2">Planning a family vacation? Find a relaxing stay with nature all around.</div>
+        <div class="tag t3">Vacation!!!!, a relaxing weekend getaway.</div>
+        <div class="highlight" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  
+</body>
+</html>
